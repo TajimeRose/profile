@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tajime Rose Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* รีเซ็ตค่าพื้นฐาน */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Canvas พื้นหลัง Matrix */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.3; /* ปรับให้จางลงอีกนิดเพื่อให้ Content เด่น */
+        }
+
+        /* คอนเทนเนอร์หลัก */
+        .profile-container {
+            position: relative;
+            z-index: 10;
+            padding: 40px; /* เพิ่มพื้นที่ภายใน */
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border-radius: 20px;
+            /* ลบ filter ที่ทำให้รูปเพี้ยนออก */
+        }
+
+        /* สร้างขอบ RGB เรืองแสง (Layer หลังสุด) */
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            top: -4px; left: -4px; right: -4px; bottom: -4px; /* ขยายออกเล็กน้อยทำเป็นขอบ */
+            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            background-size: 400%; /* ขยายขนาด gradient เพื่อให้เลื่อนได้ */
+            z-index: -2; /* อยู่หลังสุด */
+            border-radius: 24px; /* ปรับให้เข้ากับมุมโค้ง */
+            animation: glowing 20s linear infinite; /* อนิเมชั่นไหลของสี */
+            filter: blur(5px); /* ทำให้แสงฟุ้งๆ */
+        }
+
+        /* สร้างพื้นหลังสีดำปิดทับตรงกลาง (Layer กลาง) */
+        .profile-container::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.85); /* สีดำโปร่งแสงเล็กน้อย */
+            z-index: -1; /* อยู่หน้าแสง RGB แต่อยู่หลังเนื้อหา */
+            border-radius: 20px;
+        }
+
+        /* อนิเมชั่นการไหลของแสงขอบ */
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+
+        /* รูปโปรไฟล์ */
+        .profile-img-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            position: relative;
+            border-radius: 15px; /* มุมโค้ง */
+            padding: 3px; /* ช่องว่างสำหรับขอบรูป */
+            background: #222; /* พื้นหลังกรอบรูป */
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3); /* เงาสีฟ้าจางๆ รอบรูป */
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+            display: block;
+            /* รูปภาพจะสีสดใส ไม่โดน filter แล้ว */
+        }
+
+        /* เอฟเฟกต์ข้อความ RGB */
+        .rgb-text {
+            font-weight: bold;
+            text-transform: uppercase;
+            background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: rainbow-text 3s linear infinite;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes rainbow-text {
+            100% { filter: hue-rotate(-360deg); }
+        }
+
+        h1.rgb-text {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        /* ส่วนข้อมูล */
+        .info-section {
+            margin-bottom: 30px;
+            text-align: left;
+            display: inline-block;
+            width: 100%;
+            padding: 0 20px;
+        }
+
+        .info-item {
+            margin-bottom: 12px;
+            font-size: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-label {
+            color: #0f0;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+        }
+        
+        .info-value {
+            text-align: right;
+            color: #ccc;
+        }
+
+        /* โซเชียลมีเดียไอคอน */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            font-size: 1.8rem;
+            color: #fff;
+            text-decoration: none;
+            transition: 0.3s;
+            position: relative;
+            background: rgba(255,255,255,0.1);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .social-icon i {
+            /* ทำให้ไอคอนเป็น RGB */
+            background-image: linear-gradient(to bottom, violet, blue, green, yellow, red);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: rainbow-text 3s linear infinite;
+        }
+
+        /* ปรับแต่งสำหรับมือถือ */
+        @media (max-width: 600px) {
+            .profile-container {
+                padding: 30px 20px;
+                width: 95%;
+            }
+            h1.rgb-text {
+                font-size: 1.8rem;
+            }
+            .info-item {
+                flex-direction: column;
+                text-align: left;
+            }
+            .info-value {
+                text-align: left;
+                padding-left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="matrix-canvas"></canvas>
+
+    <div class="profile-container">
+        <div class="profile-img-container">
+            <img class="profile-img" src="https://img2.pic.in.th/Gemini_Generated_Image_t0vl3qt0vl3qt0vl.png" alt="Tajime Rose">
+        </div>
+
+        <h1 class="rgb-text">I am TajimeRosE.</h1>
+
+        <div class="info-section">
+            <div class="info-item">
+                <span class="info-label">[Flunem]</span> 
+                <span class="info-value">Wongsathon Witthayakhom</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">[Nickname]</span> 
+                <span class="info-value">Rose AKA. TajimrRose</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">[Email]</span>     
+                <span class="info-value">zozkxku@gmail.com</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">[AGE]</span> 
+                <span class="info-value">18 YEARS</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">[STATUS]</span> 
+                <span class="info-value rgb-text" style="font-size: 0.9rem;">single</span>
+            </div>
+             <div class="info-item">
+                <span class="info-label">[LOCATION]</span> 
+                <span class="info-value">Samut Songkhram</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">[SKILLS]</span> 
+                <span class="info-value">HTML // CSS // JS // Python // React // Github // NodeJS</span>
+            </div>
+        </div>
+
+        <div class="social-icons">
+            <a href="https://www.facebook.com/wongsathon.witthayakhom" target="_blank" class="social-icon" title="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/tajime_rose_exe/" target="_blank" class="social-icon" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://discord.com/users/1130846576013738004" target="_blank" class="social-icon" title="Discord">
+                <i class="fab fa-discord"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Matrix Rain (Code เดิม)
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const binary = '01';
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0F0'; 
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = binary.charAt(Math.floor(Math.random() * binary.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 33);
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
