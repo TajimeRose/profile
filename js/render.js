@@ -107,14 +107,85 @@ const renderAbout = ({ about, profile }) => `
     </section>
 `;
 
+const renderGallery = (gallery) => `
+    <section
+        ${gallery.id ? `id="${escapeHtml(gallery.id)}"` : ""}
+        class="project-gallery"
+        data-carousel
+        data-interval="${escapeHtml(gallery.interval)}"
+        aria-roledescription="carousel"
+        aria-label="${escapeHtml(gallery.title)}"
+    >
+        <div class="gallery-heading">
+            <span>${iconHtml(gallery.icon)}</span>
+            <h4>${escapeHtml(gallery.title)}</h4>
+            <p><strong data-carousel-current>1</strong> / ${gallery.images.length}</p>
+        </div>
+        <div class="carousel-viewport">
+            <div class="carousel-track" data-carousel-track>
+                ${gallery.images.map((image, imageIndex) => `
+                    <figure
+                        class="carousel-slide${imageIndex === 0 ? " is-active" : ""}"
+                        aria-hidden="${imageIndex === 0 ? "false" : "true"}"
+                    >
+                        <button
+                            class="lightbox-trigger"
+                            type="button"
+                            data-lightbox-trigger
+                            data-image-index="${imageIndex}"
+                            tabindex="${imageIndex === 0 ? "0" : "-1"}"
+                            aria-label="เปิดภาพเต็ม: ${escapeHtml(image.alt)}"
+                        >
+                            <img
+                                src="${escapeHtml(image.src)}"
+                                alt="${escapeHtml(image.alt)}"
+                                loading="${imageIndex === 0 ? "eager" : "lazy"}"
+                                class="fit-${escapeHtml(gallery.fit)}"
+                            >
+                            <span class="expand-hint" aria-hidden="true">
+                                ${iconHtml("fa-solid fa-expand")}
+                            </span>
+                        </button>
+                    </figure>
+                `).join("")}
+            </div>
+            <button class="carousel-arrow previous" type="button" data-carousel-previous aria-label="ดูรูปก่อนหน้า">
+                ${iconHtml("fa-solid fa-chevron-left")}
+            </button>
+            <button class="carousel-arrow next" type="button" data-carousel-next aria-label="ดูรูปถัดไป">
+                ${iconHtml("fa-solid fa-chevron-right")}
+            </button>
+        </div>
+        <div class="carousel-dots" role="group" aria-label="เลือกรูปภาพ">
+            ${gallery.images.map((image, imageIndex) => `
+                <button
+                    type="button"
+                    class="${imageIndex === 0 ? "is-active" : ""}"
+                    data-carousel-dot="${imageIndex}"
+                    aria-label="ดูรูปที่ ${imageIndex + 1}"
+                    aria-current="${imageIndex === 0 ? "true" : "false"}"
+                ></button>
+            `).join("")}
+        </div>
+    </section>
+`;
+
 const renderProjectCard = (project) => `
-    <article class="card reveal">
-        <div class="thumb">${iconHtml(project.icon)}</div>
-        <div class="card-body">
-            <h3>${escapeHtml(project.title)}</h3>
-            <p>${escapeHtml(project.description)}</p>
-            <div class="tags">${project.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
-            <div class="card-actions">${project.actions.map(renderButton).join("")}</div>
+    <article class="featured-project reveal">
+        <div class="project-summary">
+            <div class="project-icon">${iconHtml(project.icon)}</div>
+            <div>
+                <p class="project-eyebrow">${escapeHtml(project.eyebrow)}</p>
+                <h3>${escapeHtml(project.title)}</h3>
+            </div>
+        </div>
+        <p class="project-description">${escapeHtml(project.description)}</p>
+        <div class="tags">${project.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
+        <div class="project-actions">
+            ${project.actions.map(renderButton).join("")}
+        </div>
+        <div class="gallery-grid">
+            ${project.galleries.map(renderGallery).join("")}
         </div>
     </article>
 `;
@@ -123,7 +194,12 @@ const renderProjects = ({ projects }) => `
     <section id="projects">
         <div class="section-inner">
             ${renderSectionHeading(projects.title)}
-            <div class="projects-grid">
+            <div class="project-category reveal">
+                <span></span>
+                <h3>${escapeHtml(projects.category)}</h3>
+                <span></span>
+            </div>
+            <div class="projects-list">
                 ${projects.items.map(renderProjectCard).join("")}
             </div>
         </div>
@@ -150,6 +226,35 @@ const renderContact = ({ contact }) => `
     </section>
 `;
 
+const renderLightbox = () => `
+    <div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="ดูภาพเต็ม" aria-hidden="true">
+        <button class="lightbox-backdrop" type="button" data-lightbox-close tabindex="-1" aria-label="ปิดภาพเต็ม"></button>
+        <div class="lightbox-panel">
+            <div class="lightbox-toolbar">
+                <p><strong data-lightbox-current>1</strong> / <span data-lightbox-total>1</span></p>
+                <button type="button" data-lightbox-close aria-label="ปิดภาพเต็ม">
+                    ${iconHtml("fa-solid fa-xmark")}
+                </button>
+            </div>
+            <div class="lightbox-stage" data-lightbox-stage>
+                <button class="lightbox-arrow previous" type="button" data-lightbox-previous aria-label="ดูรูปก่อนหน้า">
+                    ${iconHtml("fa-solid fa-chevron-left")}
+                </button>
+                <div class="lightbox-image-wrap">
+                    <img data-lightbox-image src="" alt="">
+                </div>
+                <button class="lightbox-arrow next" type="button" data-lightbox-next aria-label="ดูรูปถัดไป">
+                    ${iconHtml("fa-solid fa-chevron-right")}
+                </button>
+            </div>
+            <div class="lightbox-footer">
+                <p data-lightbox-caption></p>
+                <span>${iconHtml("fa-solid fa-magnifying-glass-plus")} คลิกภาพเพื่อซูม</span>
+            </div>
+        </div>
+    </div>
+`;
+
 const renderFooter = ({ brand, footer }) => `
     <div class="footer-inner">
         ${renderBrand(brand)}
@@ -163,7 +268,8 @@ const renderPage = (data) => {
         renderHero(data),
         renderAbout(data),
         renderProjects(data),
-        renderContact(data)
+        renderContact(data),
+        renderLightbox()
     ].join("");
     document.getElementById("site-footer").innerHTML = renderFooter(data);
 };

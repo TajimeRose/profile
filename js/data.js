@@ -53,27 +53,57 @@ window.SITE_DATA = {
     },
     projects: {
         title: "Projects",
+        category: "โปรเจค ปวช.",
         items: [
             {
-                title: "Anime Portfolio",
-                icon: "fa-solid fa-user-astronaut",
-                description: "เว็บแนะนำตัวธีมมืดแดง พร้อม hero profile, section ผลงาน และ micro interaction.",
-                tags: ["HTML", "CSS", "JS"],
-                actions: [{ label: "Live Demo", href: "#home", primary: true }, { label: "GitHub", href: "https://github.com/TajimeRose", external: true }]
-            },
-            {
-                title: "Game UI Concept",
-                icon: "fa-solid fa-gamepad",
-                description: "หน้า UI สำหรับโปรเจกต์เกมหรือ community ที่เน้นบรรยากาศ cyber และ card layout.",
-                tags: ["React", "CSS", "Motion"],
-                actions: [{ label: "Live Demo", href: "#contact", primary: true }, { label: "GitHub", href: "https://github.com/TajimeRose", external: true }]
-            },
-            {
-                title: "Dashboard Layout",
-                icon: "fa-solid fa-database",
-                description: "โครงหน้า dashboard สำหรับจัดข้อมูล โปรเจกต์ และสถานะงานแบบอ่านง่ายบนทุกขนาดหน้าจอ.",
-                tags: ["JS", "MySQL", "UI"],
-                actions: [{ label: "Live Demo", href: "#contact", primary: true }, { label: "GitHub", href: "https://github.com/TajimeRose", external: true }]
+                title: "NongPlatoo.Ai",
+                eyebrow: "AI Tourism Assistant",
+                icon: "fa-solid fa-fish-fins",
+                description: "เว็บไซต์ผู้ช่วยท่องเที่ยวอัจฉริยะสำหรับจังหวัดสมุทรสงคราม ช่วยแนะนำสถานที่ท่องเที่ยว ร้านอาหาร และข้อมูลที่น่าสนใจผ่านระบบแชต AI ผู้ใช้งานสามารถสอบถามข้อมูลได้ทั้งภาษาไทยและภาษาอังกฤษ พร้อมแสดงรายละเอียดสถานที่ในรูปแบบที่เข้าใจง่าย เว็บไซต์ออกแบบให้ทันสมัย ใช้งานสะดวก และรองรับทุกขนาดหน้าจอ ช่วยลดเวลาในการค้นหาข้อมูลและทำให้การวางแผนท่องเที่ยวเป็นเรื่องง่ายยิ่งขึ้น",
+                tags: ["React", "TypeScript", "Python", "Flask", "Firebase", "PostgreSQL", "OpenAI API"],
+                actions: [
+                    { label: "Demo", href: "#nongplatoo-demo", icon: "fa-solid fa-arrow-up-right-from-square", primary: true },
+                    { label: "GitHub", href: "https://github.com/TajimeRose/NongPlatoo.Ai", icon: "fab fa-github", external: true }
+                ],
+                galleries: [
+                    {
+                        id: "nongplatoo-demo",
+                        title: "ภาพตัวเว็บไซต์",
+                        icon: "fa-solid fa-display",
+                        interval: 4200,
+                        fit: "contain",
+                        images: [
+                            {
+                                src: "Project/ปวช./NongPlatoo.Ai/img/หน้าเว็บ/Screenshot From 2026-06-10 22-46-32.png",
+                                alt: "หน้าเว็บไซต์ NongPlatoo.Ai ภาพที่ 1"
+                            },
+                            {
+                                src: "Project/ปวช./NongPlatoo.Ai/img/หน้าเว็บ/Screenshot From 2026-06-10 22-46-44.png",
+                                alt: "หน้าเว็บไซต์ NongPlatoo.Ai ภาพที่ 2"
+                            },
+                            {
+                                src: "Project/ปวช./NongPlatoo.Ai/img/หน้าเว็บ/Screenshot From 2026-06-10 22-46-51.png",
+                                alt: "หน้าเว็บไซต์ NongPlatoo.Ai ภาพที่ 3"
+                            }
+                        ]
+                    },
+                    {
+                        title: "ภาพการแข่งขัน",
+                        icon: "fa-solid fa-trophy",
+                        interval: 3600,
+                        fit: "cover",
+                        images: [
+                            { src: "Project/ปวช./NongPlatoo.Ai/img/การแข่งขัน/1781106099353.jpg", alt: "บรรยากาศการแข่งขัน NongPlatoo.Ai ภาพที่ 1" },
+                            { src: "Project/ปวช./NongPlatoo.Ai/img/การแข่งขัน/1781106130096.jpg", alt: "บรรยากาศการแข่งขัน NongPlatoo.Ai ภาพที่ 2" },
+                            { src: "Project/ปวช./NongPlatoo.Ai/img/การแข่งขัน/1781106133220.jpg", alt: "บรรยากาศการแข่งขัน NongPlatoo.Ai ภาพที่ 3" },
+                            { src: "Project/ปวช./NongPlatoo.Ai/img/การแข่งขัน/1781106140116.jpg", alt: "บรรยากาศการแข่งขัน NongPlatoo.Ai ภาพที่ 4" },
+                            { src: "Project/ปวช./NongPlatoo.Ai/img/การแข่งขัน/1781106159536.jpg", alt: "บรรยากาศการแข่งขัน NongPlatoo.Ai ภาพที่ 5" },
+                            { src: "Project/ปวช./NongPlatoo.Ai/img/การแข่งขัน/1781106252340.jpg", alt: "บรรยากาศการแข่งขัน NongPlatoo.Ai ภาพที่ 6" },
+                            { src: "Project/ปวช./NongPlatoo.Ai/img/การแข่งขัน/1781106261337.jpg", alt: "บรรยากาศการแข่งขัน NongPlatoo.Ai ภาพที่ 7" },
+                            { src: "Project/ปวช./NongPlatoo.Ai/img/การแข่งขัน/1781106354980.jpg", alt: "บรรยากาศการแข่งขัน NongPlatoo.Ai ภาพที่ 8" }
+                        ]
+                    }
+                ]
             }
         ]
     },
