@@ -379,6 +379,16 @@
                 inset 0 0 14px color-mix(in srgb, var(--skill-color) 12%, transparent);
             animation: skill-float 4.4s ease-in-out infinite;
             animation-delay: var(--delay, 0s);
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .skill-icon:hover {
+            transform: translateY(-6px) scale(1.2);
+            box-shadow:
+                0 0 28px color-mix(in srgb, var(--skill-color) 65%, transparent),
+                inset 0 0 18px color-mix(in srgb, var(--skill-color) 22%, transparent);
         }
 
         .skill-icon i {

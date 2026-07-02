@@ -33,14 +33,14 @@ window.SITE_DATA = {
         ]
     },
     skills: [
-        { key: "html", label: "HTML", icon: "fab fa-html5", delay: "0s" },
-        { key: "css", label: "CSS", icon: "fab fa-css3-alt", delay: "0.35s" },
-        { key: "js", label: "JavaScript", icon: "fab fa-js", delay: "0.7s" },
-        { key: "react", label: "React", icon: "fab fa-react", delay: "1.05s" },
-        { key: "github", label: "GitHub", icon: "fab fa-github", delay: "1.4s" },
-        { key: "figma", label: "Figma", icon: "fab fa-figma", delay: "1.75s" },
-        { key: "node", label: "Node.js", icon: "fab fa-node-js", delay: "2.1s" },
-        { key: "db", label: "Database", icon: "fa-solid fa-database", delay: "2.45s" }
+        { key: "html", label: "HTML", icon: "fab fa-html5", delay: "0s", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
+        { key: "css", label: "CSS", icon: "fab fa-css3-alt", delay: "0.35s", url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
+        { key: "js", label: "JavaScript", icon: "fab fa-js", delay: "0.7s", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
+        { key: "react", label: "React", icon: "fab fa-react", delay: "1.05s", url: "https://react.dev" },
+        { key: "github", label: "GitHub", icon: "fab fa-github", delay: "1.4s", url: "https://github.com/TajimeRose" },
+        { key: "figma", label: "Figma", icon: "fab fa-figma", delay: "1.75s", url: "https://www.figma.com" },
+        { key: "node", label: "Node.js", icon: "fab fa-node-js", delay: "2.1s", url: "https://nodejs.org" },
+        { key: "db", label: "Database", icon: "fa-solid fa-database", delay: "2.45s", url: "https://www.mongodb.com" }
     ],
     about: {
         title: "About Me",
@@ -62,7 +62,7 @@ window.SITE_DATA = {
                 description: "เว็บไซต์ผู้ช่วยท่องเที่ยวอัจฉริยะสำหรับจังหวัดสมุทรสงคราม ช่วยแนะนำสถานที่ท่องเที่ยว ร้านอาหาร และข้อมูลที่น่าสนใจผ่านระบบแชต AI ผู้ใช้งานสามารถสอบถามข้อมูลได้ทั้งภาษาไทยและภาษาอังกฤษ พร้อมแสดงรายละเอียดสถานที่ในรูปแบบที่เข้าใจง่าย เว็บไซต์ออกแบบให้ทันสมัย ใช้งานสะดวก และรองรับทุกขนาดหน้าจอ ช่วยลดเวลาในการค้นหาข้อมูลและทำให้การวางแผนท่องเที่ยวเป็นเรื่องง่ายยิ่งขึ้น",
                 tags: ["React", "TypeScript", "Python", "Flask", "Firebase", "PostgreSQL", "OpenAI API"],
                 actions: [
-                    { label: "Demo", href: "#nongplatoo-demo", icon: "fa-solid fa-arrow-up-right-from-square", primary: true },
+                    { label: "Demo", href: "https://github.com/TajimeRose/Demo-NongPlatoo.Ai.git", icon: "fa-solid fa-arrow-up-right-from-square", primary: true },
                     { label: "GitHub", href: "https://github.com/TajimeRose/NongPlatoo.Ai", icon: "fab fa-github", external: true }
                 ],
                 galleries: [

@@ -46,9 +46,9 @@ const renderProfileCircle = (profile) => `
 const renderSkillOrbit = (skills) => `
     <div class="skill-orbit" aria-hidden="true">
         ${skills.map((skill) => `
-            <div class="skill-icon ${escapeHtml(skill.key)}" style="--delay: ${escapeHtml(skill.delay)};" aria-label="${escapeHtml(skill.label)}">
+            <a href="${escapeHtml(skill.url)}" target="_blank" rel="noopener noreferrer" class="skill-icon ${escapeHtml(skill.key)}" style="--delay: ${escapeHtml(skill.delay)};" aria-label="${escapeHtml(skill.label)}" title="${escapeHtml(skill.label)}">
                 ${iconHtml(skill.icon)}
-            </div>
+            </a>
         `).join("")}
     </div>
 `;
