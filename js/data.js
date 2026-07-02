@@ -21,8 +21,8 @@ window.SITE_DATA = {
         { label: "Email", href: "mailto:wongsathon.witt@gmail.com", icon: "fa-solid fa-envelope" }
     ],
     hero: {
-        eyebrow: "Anime Cyber Portfolio",
-        eyebrowIcon: "fa-solid fa-circle-dot",
+        eyebrow: "墨韻 Ink Portfolio",
+        eyebrowIcon: "fa-solid fa-feather",
         titlePrefix: "Hi, I'm",
         titleName: "TajimeRose",
         role: "Frontend Developer",

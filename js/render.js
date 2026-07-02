@@ -15,9 +15,8 @@ const renderBrand = (brand) => `
     </a>
 `;
 
-const renderHeader = ({ brand, nav, socials }) => `
+const renderHeader = ({ nav, socials }) => `
     <div class="nav-shell">
-        ${renderBrand(brand)}
         <nav class="main-nav" aria-label="Main navigation">
             ${nav.map((item, index) => `
                 <a href="${escapeHtml(item.href)}" class="${index === 0 ? "active" : ""}">${escapeHtml(item.label)}</a>
@@ -57,15 +56,15 @@ const renderHero = ({ hero, profile, skills }) => `
     <section class="hero" id="home">
         <div class="section-inner hero-grid">
             <div>
-                <div class="eyebrow reveal">${iconHtml(hero.eyebrowIcon)} ${escapeHtml(hero.eyebrow)}</div>
-                <h1 class="reveal">${escapeHtml(hero.titlePrefix)} <span class="accent">${escapeHtml(hero.titleName)}</span></h1>
-                <div class="role reveal">${escapeHtml(hero.role)}</div>
-                <p class="lead reveal">${escapeHtml(hero.lead)}</p>
-                <div class="hero-actions reveal">
+                <div class="eyebrow reveal stagger-1">${iconHtml(hero.eyebrowIcon)} ${escapeHtml(hero.eyebrow)}</div>
+                <h1 class="reveal stagger-2">${escapeHtml(hero.titlePrefix)} <span class="accent">${escapeHtml(hero.titleName)}</span></h1>
+                <div class="role reveal stagger-3">${escapeHtml(hero.role)}</div>
+                <p class="lead reveal stagger-4">${escapeHtml(hero.lead)}</p>
+                <div class="hero-actions reveal stagger-5">
                     ${hero.actions.map(renderButton).join("")}
                 </div>
             </div>
-            <div class="profile-stage reveal" aria-label="Profile artwork">
+            <div class="profile-stage reveal-scale stagger-2" aria-label="Profile artwork">
                 <div class="orbit-container">
                     ${renderProfileCircle(profile)}
                     ${renderSkillOrbit(skills)}
@@ -87,14 +86,14 @@ const renderAbout = ({ about, profile }) => `
         <div class="section-inner">
             ${renderSectionHeading(about.title)}
             <div class="about-grid">
-                <div class="image-card reveal">
+                <div class="image-card reveal-left">
                     ${renderProfileCircle(profile)}
                 </div>
-                <div class="reveal">
+                <div class="reveal-right">
                     <p class="section-copy">${escapeHtml(about.copy)}</p>
                     <div class="info-grid">
-                        ${about.cards.map((card) => `
-                            <article class="info-card">
+                        ${about.cards.map((card, i) => `
+                            <article class="info-card reveal stagger-${i + 1}">
                                 ${iconHtml(card.icon)}
                                 <h3>${escapeHtml(card.title)}</h3>
                                 <p>${escapeHtml(card.text)}</p>
@@ -206,8 +205,8 @@ const renderProjects = ({ projects }) => `
     </section>
 `;
 
-const renderContactCard = (item) => `
-    <a class="contact-card" href="${escapeHtml(item.href)}"${externalAttrs(item)}>
+const renderContactCard = (item, index) => `
+    <a class="contact-card reveal stagger-${(index % 6) + 1}" href="${escapeHtml(item.href)}"${externalAttrs(item)}>
         ${iconHtml(item.icon)}
         <span><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.text)}</p></span>
     </a>
@@ -218,8 +217,8 @@ const renderContact = ({ contact }) => `
         <div class="section-inner">
             ${renderSectionHeading(contact.title)}
             <div class="contact-grid">
-                <div class="contact-list reveal">
-                    ${contact.links.map(renderContactCard).join("")}
+                <div class="contact-list">
+                    ${contact.links.map((item, i) => renderContactCard(item, i)).join("")}
                 </div>
             </div>
         </div>
@@ -255,9 +254,8 @@ const renderLightbox = () => `
     </div>
 `;
 
-const renderFooter = ({ brand, footer }) => `
+const renderFooter = ({ footer }) => `
     <div class="footer-inner">
-        ${renderBrand(brand)}
         <p>${escapeHtml(footer.copyright)}</p>
     </div>
 `;

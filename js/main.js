@@ -3,9 +3,9 @@ const initRevealAnimations = () => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) entry.target.classList.add("active");
         });
-    }, { threshold: 0.16 });
+    }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
 
-    document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+    document.querySelectorAll(".reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-rotate").forEach((element) => revealObserver.observe(element));
 };
 
 const initActiveNav = () => {
@@ -27,6 +27,42 @@ const initActiveNav = () => {
 
     window.addEventListener("scroll", setActiveLink, { passive: true });
     setActiveLink();
+};
+
+const initParallax = () => {
+    const mountainFar = document.querySelector(".ink-mountain-far");
+    const mountainMid = document.querySelector(".ink-mountain-mid");
+    const mountainNear = document.querySelector(".ink-mountain-near");
+    const clouds = document.querySelectorAll(".ink-cloud");
+
+    if (!mountainFar) return;
+
+    let ticking = false;
+
+    const updateParallax = () => {
+        const scrollY = window.scrollY;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = Math.min(scrollY / maxScroll, 1);
+
+        mountainFar.style.transform = `translateY(${progress * -20}px)`;
+        mountainMid.style.transform = `translateY(${progress * -45}px)`;
+        mountainNear.style.transform = `translateY(${progress * -70}px)`;
+
+        clouds.forEach((cloud, i) => {
+            const speed = (i + 1) * 25;
+            cloud.style.transform = `translateY(${progress * -speed}px)`;
+            cloud.style.opacity = Math.max(0.2, 1 - progress * 1.2);
+        });
+
+        ticking = false;
+    };
+
+    window.addEventListener("scroll", () => {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }, { passive: true });
 };
 
 const initCarousels = () => {
@@ -162,12 +198,94 @@ const initLightbox = () => {
     });
 };
 
+const initFloatingParticles = () => {
+    const bg = document.querySelector(".ink-bg");
+    if (!bg) return;
+
+    const particleTypes = ["ink-particle--dot", "ink-particle--glow", "ink-particle--plum"];
+
+    const createParticle = () => {
+        const el = document.createElement("div");
+        const type = particleTypes[Math.floor(Math.random() * particleTypes.length)];
+        const size = 4 + Math.random() * 12;
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        const dx = (Math.random() - 0.5) * 120;
+        const dy = -30 - Math.random() * 80;
+        const duration = 6 + Math.random() * 10;
+
+        el.className = `ink-particle ${type}`;
+        el.style.cssText = `
+            width: ${size}px;
+            height: ${size}px;
+            left: ${x}%;
+            top: ${y}%;
+            --dx: ${dx}px;
+            --dy: ${dy}px;
+            --scale-end: ${0.3 + Math.random() * 0.5};
+            animation: particle-float ${duration}s ease-in-out forwards;
+        `;
+
+        bg.appendChild(el);
+
+        setTimeout(() => {
+            if (el.parentNode) el.parentNode.removeChild(el);
+        }, duration * 1000);
+    };
+
+    // Create initial burst
+    for (let i = 0; i < 8; i++) {
+        setTimeout(createParticle, i * 300);
+    }
+
+    // Continuously spawn particles
+    setInterval(createParticle, 1800);
+};
+
+const initScrollProgress = () => {
+    const bar = document.createElement("div");
+    bar.className = "scroll-progress";
+    document.body.appendChild(bar);
+
+    let ticking = false;
+    const updateProgress = () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = `${progress}%`;
+        ticking = false;
+    };
+
+    window.addEventListener("scroll", () => {
+        if (!ticking) {
+            requestAnimationFrame(updateProgress);
+            ticking = true;
+        }
+    }, { passive: true });
+};
+
+const initSectionDividers = () => {
+    const sections = document.querySelectorAll("main > section");
+    sections.forEach((section, index) => {
+        if (index < sections.length - 1) {
+            const divider = document.createElement("div");
+            divider.className = "section-divider";
+            divider.setAttribute("aria-hidden", "true");
+            section.after(divider);
+        }
+    });
+};
+
 const initApp = () => {
     renderPage(window.SITE_DATA);
     initRevealAnimations();
     initActiveNav();
+    initParallax();
     initCarousels();
     initLightbox();
+    initFloatingParticles();
+    initScrollProgress();
+    initSectionDividers();
 };
 
 document.addEventListener("DOMContentLoaded", initApp);
