@@ -37,7 +37,7 @@
             overflow-x: hidden;
             font-family: "Noto Sans Thai", "Outfit", sans-serif;
             color: var(--ink);
-            background: var(--bg);
+            background: transparent;
         }
 
         body.lightbox-open {
@@ -50,11 +50,65 @@
             z-index: -10;
             pointer-events: none;
             overflow: hidden;
+        }
+
+        .ink-bg-image {
+            position: absolute;
+            inset: 0;
+            background: url("../img/พื้นหลัง.jpg") center / cover no-repeat;
+        }
+
+        .ink-bg-overlay {
+            position: absolute;
+            inset: 0;
             background:
-                radial-gradient(ellipse at 20% 20%, rgba(90, 122, 107, 0.12) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(184, 125, 138, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(139, 76, 57, 0.06) 0%, transparent 60%),
-                url("data:image/svg+xml,%3Csvg width='300' height='300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+                radial-gradient(ellipse at 20% 20%, rgba(90, 122, 107, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(184, 125, 138, 0.06) 0%, transparent 50%),
+                linear-gradient(to bottom, rgba(244, 236, 225, 0.3), rgba(244, 236, 225, 0.15) 50%, rgba(244, 236, 225, 0.3));
+        }
+
+        .ink-bg-paper {
+            position: absolute;
+            inset: 0;
+            background:
+                url("data:image/svg+xml,%3Csvg width='600' height='600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.04'/%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .ink-bg-wash {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 10% 60%, rgba(139, 76, 57, 0.07) 0%, transparent 45%),
+                radial-gradient(ellipse at 85% 30%, rgba(90, 122, 107, 0.08) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 90%, rgba(184, 125, 138, 0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 30% 10%, rgba(139, 76, 57, 0.04) 0%, transparent 35%);
+            animation: wash-shift 30s ease-in-out infinite alternate;
+        }
+
+        .ink-bg-splatter {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 15% 25%, rgba(60, 50, 35, 0.06) 0%, rgba(60, 50, 35, 0.02) 8%, transparent 12%),
+                radial-gradient(circle at 75% 15%, rgba(90, 122, 107, 0.05) 0%, transparent 10%),
+                radial-gradient(circle at 45% 70%, rgba(139, 76, 57, 0.04) 0%, transparent 8%),
+                radial-gradient(circle at 88% 65%, rgba(60, 50, 35, 0.05) 0%, transparent 6%),
+                radial-gradient(circle at 25% 85%, rgba(184, 125, 138, 0.04) 0%, transparent 9%),
+                radial-gradient(circle at 60% 40%, rgba(60, 50, 35, 0.03) 0%, transparent 5%),
+                radial-gradient(circle at 5% 50%, rgba(90, 122, 107, 0.04) 0%, transparent 7%),
+                radial-gradient(circle at 95% 90%, rgba(139, 76, 57, 0.03) 0%, transparent 11%);
+        }
+
+        .ink-bg-vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 50%, rgba(44, 36, 24, 0.08) 100%);
+        }
+
+        @keyframes wash-shift {
+            0% { opacity: 0.7; transform: scale(1) rotate(0deg); }
+            100% { opacity: 1; transform: scale(1.08) rotate(0.5deg); }
         }
 
         .ink-bg::before {
@@ -62,8 +116,8 @@
             position: absolute;
             inset: 0;
             background:
-                radial-gradient(circle at 15% 85%, rgba(90, 122, 107, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 85% 15%, rgba(184, 125, 138, 0.12) 0%, transparent 40%);
+                radial-gradient(circle at 15% 85%, rgba(90, 122, 107, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 15%, rgba(184, 125, 138, 0.06) 0%, transparent 40%);
             animation: bg-shift 20s ease-in-out infinite alternate;
         }
 
@@ -72,8 +126,8 @@
             position: absolute;
             inset: 0;
             background:
-                repeating-linear-gradient(0deg, transparent 0 2px, rgba(60, 50, 35, 0.03) 2px 3px),
-                repeating-linear-gradient(90deg, transparent 0 2px, rgba(60, 50, 35, 0.025) 2px 3px);
+                repeating-linear-gradient(0deg, transparent 0 2px, rgba(60, 50, 35, 0.015) 2px 3px),
+                repeating-linear-gradient(90deg, transparent 0 2px, rgba(60, 50, 35, 0.012) 2px 3px);
         }
 
         @keyframes bg-shift {
@@ -371,8 +425,29 @@
         }
 
         section {
+            position: relative;
             padding: clamp(5.8rem, 9vw, 8.5rem) 1rem;
             scroll-margin-top: 76px;
+        }
+
+        section:nth-child(even)::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 70% 50%, rgba(90, 122, 107, 0.04) 0%, transparent 50%),
+                linear-gradient(180deg, transparent 0%, rgba(44, 36, 24, 0.02) 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        section:nth-child(odd)::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 30% 50%, rgba(184, 125, 138, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(139, 76, 57, 0.025) 0%, transparent 40%);
+            pointer-events: none;
         }
 
         .section-inner {
