@@ -15,18 +15,15 @@ const renderBrand = (brand) => `
     </a>
 `;
 
-const renderHeader = ({ nav, socials }) => `
+const renderHeader = ({ brand, nav, socials }) => `
     <div class="nav-shell">
+        ${renderBrand(brand)}
         <nav class="main-nav" aria-label="Main navigation">
             ${nav.map((item, index) => `
                 <a href="${escapeHtml(item.href)}" class="${index === 0 ? "active" : ""}">${escapeHtml(item.label)}</a>
             `).join("")}
         </nav>
-        <div class="socials" aria-label="Social links">
-            ${socials.map((item) => `
-                <a href="${escapeHtml(item.href)}" aria-label="${escapeHtml(item.label)}"${externalAttrs(item)}>${iconHtml(item.icon)}</a>
-            `).join("")}
-        </div>
+        <a class="nav-cta" href="#contact">Let's talk <span>↗</span></a>
     </div>
 `;
 
@@ -54,28 +51,23 @@ const renderSkillOrbit = (skills) => `
 
 const renderHero = ({ hero, profile, skills }) => `
     <section class="hero" id="home">
+        <div class="hero-frame" aria-hidden="true"></div>
         <div class="section-inner hero-grid">
-            <div>
-                <div class="eyebrow reveal stagger-1">${iconHtml(hero.eyebrowIcon)} ${escapeHtml(hero.eyebrow)}</div>
-                <h1 class="reveal stagger-2">${escapeHtml(hero.titlePrefix)} <span class="accent">${escapeHtml(hero.titleName)}</span></h1>
-                <div class="role reveal stagger-3">${escapeHtml(hero.role)}</div>
-                <p class="lead reveal stagger-4">${escapeHtml(hero.lead)}</p>
-                <div class="hero-actions reveal stagger-5">
-                    ${hero.actions.map(renderButton).join("")}
-                </div>
-            </div>
-            <div class="profile-stage reveal-scale stagger-2" aria-label="Profile artwork">
-                <div class="orbit-container">
-                    ${renderProfileCircle(profile)}
-                    ${renderSkillOrbit(skills)}
-                </div>
+            <div class="hero-copy">
+                <div class="hero-kicker reveal stagger-1">FRONTEND DEVELOPER / CREATIVE WEB / 3D EXPERIENCES</div>
+                <h1 class="reveal stagger-2">I turn ideas into <span class="accent">digital experiences.</span></h1>
+                <p class="lead reveal stagger-3">${escapeHtml(hero.lead)}</p>
+                <div class="hero-actions reveal stagger-4">${hero.actions.map(renderButton).join("")}</div>
             </div>
         </div>
+        <div class="hero-index"><span>00</span><span>INTRO</span></div>
+        <div class="hero-status"><span></span> AVAILABLE FOR CREATIVE WORK</div>
     </section>
 `;
 
 const renderSectionHeading = (title) => `
     <div class="section-heading reveal">
+        <p class="section-label">TAJIME / ${escapeHtml(title)}</p>
         <h2>${escapeHtml(title)}</h2>
         <div class="underline"></div>
     </div>
@@ -86,10 +78,25 @@ const renderAbout = ({ about, profile }) => `
         <div class="section-inner">
             ${renderSectionHeading(about.title)}
             <div class="about-grid">
-                <div class="image-card reveal-left">
-                    ${renderProfileCircle(profile)}
+                <div class="credential-rig reveal-left" data-credential tabindex="0" role="button" aria-label="พลิกบัตรโปรไฟล์" aria-pressed="false">
+                    <div class="credential-card">
+                        <div class="credential-face credential-front">
+                            <div class="credential-top"><strong>TR / CREATIVE PASS</strong><span>TR—01</span></div>
+                            <img src="${escapeHtml(profile.image)}" alt="${escapeHtml(profile.alt)}">
+                            <div class="credential-name"><small>FRONTEND / CREATIVE WEB</small><strong>TajimeRose</strong><span>Wongsathon Witthayakhom</span></div>
+                            <div class="credential-foot"><span>PUBLIC PROFILE</span><span>ISSUED 2026</span></div>
+                        </div>
+                        <div class="credential-face credential-back">
+                            <small>BUILDER PASS / BACK</small>
+                            <h3>From idea to interface.</h3>
+                            <ol>${about.cards.map((card, index) => `<li><span>0${index + 1}</span>${escapeHtml(card.title)}</li>`).join("")}</ol>
+                            <p>HTML / CSS / JAVASCRIPT / REACT / THREE.JS</p>
+                        </div>
+                    </div>
+                    <span class="credential-hint">CLICK TO FLIP ↗</span>
                 </div>
-                <div class="reveal-right">
+                <div class="about-copy reveal-right">
+                    <p class="about-intro">I like being close to the whole build.</p>
                     <p class="section-copy">${escapeHtml(about.copy)}</p>
                     <div class="info-grid">
                         ${about.cards.map((card, i) => `
@@ -169,8 +176,9 @@ const renderGallery = (gallery) => `
     </section>
 `;
 
-const renderProjectCard = (project) => `
-    <article class="featured-project reveal">
+const renderProjectCard = (project, index) => `
+    <article class="featured-project reveal" data-project-index="0${index + 1}">
+        <span class="project-number">0${index + 1}</span>
         <div class="project-summary">
             <div class="project-icon">${iconHtml(project.icon)}</div>
             <div>
@@ -178,10 +186,17 @@ const renderProjectCard = (project) => `
                 <h3>${escapeHtml(project.title)}</h3>
             </div>
         </div>
-        <p class="project-description">${escapeHtml(project.description)}</p>
-        <div class="tags">${project.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
-        <div class="project-actions">
-            ${project.actions.map(renderButton).join("")}
+        <div class="project-dossier">
+            <div>
+                <p class="project-description">${escapeHtml(project.description)}</p>
+                <div class="tags">${project.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
+                <div class="project-actions">${project.actions.map(renderButton).join("")}</div>
+            </div>
+            <dl class="project-ledger">
+                <div><dt>Contribution</dt><dd>Product design, frontend implementation, responsive system</dd></div>
+                <div><dt>Focus</dt><dd>${escapeHtml(project.eyebrow)}</dd></div>
+                <div><dt>Status</dt><dd>Selected portfolio project / Active showcase</dd></div>
+            </dl>
         </div>
         <div class="gallery-grid">
             ${project.galleries.map(renderGallery).join("")}
@@ -214,9 +229,12 @@ const renderContactCard = (item, index) => `
 
 const renderContact = ({ contact }) => `
     <section id="contact">
+        <div class="contact-word" aria-hidden="true">CONTACT</div>
         <div class="section-inner">
-            ${renderSectionHeading(contact.title)}
-            <div class="contact-grid">
+            <div class="contact-stage reveal">
+                <p class="section-label">START A CONVERSATION</p>
+                <h2>Have something interesting to build?</h2>
+                <p>เปิดรับโปรเจกต์ frontend, interactive website และ creative 3D experience ที่ต้องการภาพลักษณ์เฉพาะตัว</p>
                 <div class="contact-list">
                     ${contact.links.map((item, i) => renderContactCard(item, i)).join("")}
                 </div>
@@ -256,6 +274,8 @@ const renderLightbox = () => `
 
 const renderFooter = ({ footer }) => `
     <div class="footer-inner">
+        <div class="footer-meta"><span>FRONTEND DEVELOPER</span><span>SAMUT SONGKHRAM / TH</span><span>AVAILABLE 2026</span></div>
+        <strong>tajime<span>.</span></strong>
         <p>${escapeHtml(footer.copyright)}</p>
     </div>
 `;

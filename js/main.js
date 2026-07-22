@@ -276,16 +276,92 @@ const initSectionDividers = () => {
     });
 };
 
+const initKineticCards = () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)").matches) return;
+
+    document.querySelectorAll(".info-card, .featured-project, .contact-card, .image-card").forEach((card) => {
+        card.addEventListener("pointermove", (event) => {
+            const bounds = card.getBoundingClientRect();
+            card.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
+            card.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
+            card.style.setProperty("--rotate-x", `${((event.clientY - bounds.top) / bounds.height - 0.5) * -4}deg`);
+            card.style.setProperty("--rotate-y", `${((event.clientX - bounds.left) / bounds.width - 0.5) * 4}deg`);
+        });
+        card.addEventListener("pointerleave", () => {
+            card.style.setProperty("--rotate-x", "0deg");
+            card.style.setProperty("--rotate-y", "0deg");
+        });
+    });
+};
+
+const initEntryGate = () => {
+    const gate = document.querySelector("[data-entry-gate]");
+    if (!gate) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let entrySeen = false;
+    try {
+        entrySeen = sessionStorage.getItem("tajime-entry-seen") === "1";
+    } catch (error) {
+        entrySeen = true;
+    }
+
+    if (reduceMotion || entrySeen) {
+        gate.remove();
+        return;
+    }
+
+    document.body.classList.add("entry-open");
+    window.setTimeout(() => gate.classList.add("is-leaving"), 1050);
+    window.setTimeout(() => {
+        try {
+            sessionStorage.setItem("tajime-entry-seen", "1");
+        } catch (error) {
+            // The animation can complete normally when storage is unavailable.
+        }
+        document.body.classList.remove("entry-open");
+        gate.remove();
+    }, 1650);
+};
+
+const initCredential = () => {
+    const credential = document.querySelector("[data-credential]");
+    if (!credential) return;
+
+    const flip = () => {
+        const flipped = credential.classList.toggle("is-flipped");
+        credential.setAttribute("aria-pressed", String(flipped));
+    };
+    credential.addEventListener("click", flip);
+    credential.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            flip();
+        }
+    });
+};
+
+const initHeaderState = () => {
+    const header = document.getElementById("site-header");
+    const update = () => header.classList.toggle("is-scrolled", window.scrollY > 40);
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+};
+
 const initApp = () => {
+    initEntryGate();
     renderPage(window.SITE_DATA);
+    window.initInkScene?.();
     initRevealAnimations();
     initActiveNav();
     initParallax();
     initCarousels();
     initLightbox();
-    initFloatingParticles();
     initScrollProgress();
     initSectionDividers();
+    initKineticCards();
+    initCredential();
+    initHeaderState();
 };
 
 document.addEventListener("DOMContentLoaded", initApp);
