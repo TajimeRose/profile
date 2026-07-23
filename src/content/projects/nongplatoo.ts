@@ -1,0 +1,173 @@
+import { defineProject } from "../schema";
+
+export const nongplatoo = defineProject({
+  canonicalId: "project-nongplatoo",
+  slug: "nongplatoo-ai",
+  title: "NongPlatoo.Ai",
+  oneLiner: "An AI travel companion for exploring Samut Songkhram.",
+  cardCopy:
+    "A bilingual AI chat experience that helps visitors discover local places, food, and useful travel information through a responsive interface.",
+  caseStudyLead:
+    "NongPlatoo.Ai brings conversational guidance and local travel information into one experience, making it easier to plan a visit to Samut Songkhram.",
+  role: "Frontend Developer",
+  year: "2026",
+  educationStage: "vocational",
+  educationLabel: "ปวช. Project",
+  status: "prototype",
+  liveStatus: "offline",
+  statusLabel: "Prototype",
+  domains: ["AI Tourism Assistant", "Responsive Web", "Local Information"],
+  technologies: ["React", "TypeScript", "Python", "Flask", "Firebase", "PostgreSQL", "OpenAI API"],
+  featuredOrder: 1,
+  showInSelectedSystems: true,
+  problem:
+    "Local travel information is scattered across different sources, forcing visitors to compare places, restaurants, and practical details on their own.",
+  audience: [
+    "Visitors planning a trip through Samut Songkhram",
+    "Thai- and English-speaking users looking for local recommendations",
+  ],
+  mechanism: [
+    "Accept a travel question through a responsive chat interface.",
+    "Send the request to the backend for AI-assisted processing.",
+    "Present recommendations and place details in a format that is easy to scan and compare.",
+  ],
+  contributions: [
+    "Built the website interface and responsive layout.",
+    "Structured the conversational flow and presentation of local travel information.",
+    "Connected the frontend to the project's APIs and data services.",
+  ],
+  teamAttribution:
+    "This case study is based on the project files, screenshots, competition photographs, and public repositories supplied by Wongsathon. No unverified competition result or additional team role is claimed.",
+  decisions: [
+    {
+      title: "Start with a conversation",
+      rationale: "People can ask for what they need without learning a large menu or category structure.",
+      tradeoff: "The usefulness of each response depends on the available data and connected AI service.",
+    },
+    {
+      title: "Design for travel-sized screens",
+      rationale: "Travel information is often searched from a phone while someone is already on the move.",
+      tradeoff: "Some content and controls need to be condensed or reordered on smaller screens.",
+    },
+  ],
+  evidence: [
+    {
+      id: "nong-repo-01",
+      claim: "The NongPlatoo.Ai source repository is publicly available on GitHub.",
+      scope: "product",
+      state: "owner-confirmed",
+      asOf: "2026-07-23",
+      source: {
+        label: "GitHub repository",
+        href: "https://github.com/TajimeRose/NongPlatoo.Ai",
+      },
+    },
+  ],
+  limitations: [
+    "A continuously available public deployment has not been verified, so the project remains listed as an offline prototype.",
+    "AI response quality and backend flows were not independently tested end to end during this portfolio update.",
+  ],
+  links: [
+    {
+      label: "View repository",
+      href: "https://github.com/TajimeRose/NongPlatoo.Ai",
+      kind: "repository",
+    },
+    {
+      label: "View demo repository",
+      href: "https://github.com/TajimeRose/Demo-NongPlatoo.Ai",
+      kind: "repository",
+    },
+  ],
+  media: [
+    {
+      state: "published",
+      src: "/media/projects/nongplatoo/screenshot-from-2026-06-10-22-46-32.webp",
+      alt: "NongPlatoo.Ai website interface showing its travel assistant experience.",
+      width: 1600,
+      height: 758,
+      sourceNote: "Owner-supplied product screenshot, prepared for the portfolio on 2026-07-23.",
+    },
+    {
+      state: "published",
+      src: "/media/projects/nongplatoo/screenshot-from-2026-06-10-22-46-44.webp",
+      alt: "NongPlatoo.Ai responsive product screen.",
+      width: 1600,
+      height: 805,
+      sourceNote: "Owner-supplied product screenshot, prepared for the portfolio on 2026-07-23.",
+    },
+    {
+      state: "published",
+      src: "/media/projects/nongplatoo/screenshot-from-2026-06-10-22-46-51.webp",
+      alt: "A second NongPlatoo.Ai interface state.",
+      width: 1600,
+      height: 805,
+      sourceNote: "Owner-supplied product screenshot, prepared for the portfolio on 2026-07-23.",
+    },
+    {
+      state: "published",
+      src: "/media/projects/nongplatoo/competition/1781106099353.webp",
+      alt: "NongPlatoo.Ai team presentation during the competition.",
+      width: 1200,
+      height: 630,
+      sourceNote: "Owner-supplied competition photograph, prepared for the portfolio on 2026-07-23.",
+    },
+    {
+      state: "published",
+      src: "/media/projects/nongplatoo/competition/1781106130096.webp",
+      alt: "The NongPlatoo.Ai project team at the competition venue.",
+      width: 1477,
+      height: 1108,
+      sourceNote: "Owner-supplied competition photograph, prepared for the portfolio on 2026-07-23.",
+    },
+    {
+      state: "published",
+      src: "/media/projects/nongplatoo/competition/1781106133220.webp",
+      alt: "Competition activity documented by the NongPlatoo.Ai team.",
+      width: 1477,
+      height: 1108,
+      sourceNote: "Owner-supplied competition photograph, prepared for the portfolio on 2026-07-23.",
+    },
+    {
+      state: "published",
+      src: "/media/projects/nongplatoo/competition/1781106140116.webp",
+      alt: "NongPlatoo.Ai team members working during the competition.",
+      width: 1477,
+      height: 1108,
+      sourceNote: "Owner-supplied competition photograph, prepared for the portfolio on 2026-07-23.",
+    },
+    {
+      state: "published",
+      src: "/media/projects/nongplatoo/competition/1781106159536.webp",
+      alt: "A presentation moment from the NongPlatoo.Ai competition.",
+      width: 1600,
+      height: 900,
+      sourceNote: "Owner-supplied competition photograph, prepared for the portfolio on 2026-07-23.",
+    },
+    {
+      state: "published",
+      src: "/media/projects/nongplatoo/competition/1781106252340.webp",
+      alt: "NongPlatoo.Ai participants at the project competition.",
+      width: 1588,
+      height: 1030,
+      sourceNote: "Owner-supplied competition photograph, prepared for the portfolio on 2026-07-23.",
+    },
+    {
+      state: "published",
+      src: "/media/projects/nongplatoo/competition/1781106261337.webp",
+      alt: "The NongPlatoo.Ai team presenting their work.",
+      width: 1477,
+      height: 1108,
+      sourceNote: "Owner-supplied competition photograph, prepared for the portfolio on 2026-07-23.",
+    },
+    {
+      state: "published",
+      src: "/media/projects/nongplatoo/competition/1781106354980.webp",
+      alt: "A group photograph from the NongPlatoo.Ai competition.",
+      width: 1600,
+      height: 900,
+      sourceNote: "Owner-supplied competition photograph, prepared for the portfolio on 2026-07-23.",
+    },
+  ],
+  lastVerifiedAt: "2026-07-23",
+});
