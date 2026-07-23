@@ -1,3 +1,0 @@
-module.exports=[89221,a=>{"use strict";a.i(7997),a.i(99475);var b=a.i(52425);let c={alt:"Wongsathon Witthayakhom, Frontend Developer",contentType:"image/png",size:{width:1200,height:630}};async function d(a){let{__metadata_id__:d,...e}=await a.params,f=(0,b.fillMetadataSegment)("/",e,"opengraph-image",!1);return[function(a){let b={alt:a.alt,type:a.contentType||"image/png",url:f+"?be3b2a6a52dbf31f"},{size:c}=a;return c&&(b.width=c.width,b.height=c.height),b}(c)]}a.s(["default",0,d],89221)},8858,a=>{a.n(a.i(89221))}];
-
-//# sourceMappingURL=src_app_opengraph-image--metadata_15q1-ln.js.map
