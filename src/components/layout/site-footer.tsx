@@ -68,6 +68,22 @@ export function SiteFooter() {
             >
               Instagram
             </a>
+            <a
+              href={siteContent.contact.facebook}
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors hover:text-paper-0"
+            >
+              Facebook
+            </a>
+            <a
+              href={siteContent.contact.x}
+              target="_blank"
+              rel="noreferrer"
+              className="transition-colors hover:text-paper-0"
+            >
+              X
+            </a>
             <a href="#main-content" className="transition-colors hover:text-paper-0">
               Back to top ↑
             </a>

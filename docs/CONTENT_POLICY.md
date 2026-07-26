@@ -9,6 +9,8 @@
 - Public email: `wongsathon.witt@gmail.com`.
 - Public GitHub: `https://github.com/TajimeRose`.
 - Public Instagram: `https://www.instagram.com/tajimerose.dev/`.
+- Public Facebook: `https://www.facebook.com/wongsathon.witthayakhom`.
+- Public X: `https://x.com/Tajime_ROSE`.
 - Current public projects:
   - NongPlatoo.Ai, identified as a ปวช. project and described conservatively as
     an offline prototype until a deployment and full flow are independently checked.

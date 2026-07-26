@@ -10,7 +10,7 @@ let managedMediaCount = 0;
 
 const heroSource = resolve(
   projectRoot,
-  "ข้อมูลของฉัน/img/พื้นหลังตัวเอง.png",
+  "img/พื้นหลังตัวเอง.png",
 );
 const credentialPortrait = resolve(
   projectRoot,

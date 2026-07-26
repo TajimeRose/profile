@@ -98,7 +98,12 @@ export default function RootLayout({
         jobTitle: siteContent.role,
         description: siteContent.positioning,
         url: siteUrl,
-        sameAs: [siteContent.contact.github, siteContent.contact.instagram],
+         sameAs: [
+           siteContent.contact.github,
+           siteContent.contact.instagram,
+           siteContent.contact.facebook,
+           siteContent.contact.x,
+         ],
       },
     ],
   };

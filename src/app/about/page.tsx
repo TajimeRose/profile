@@ -26,7 +26,12 @@ export default function AboutPage() {
       "@type": "Place",
       name: siteContent.contact.location,
     },
-    sameAs: [siteContent.contact.github, siteContent.contact.instagram],
+    sameAs: [
+      siteContent.contact.github,
+      siteContent.contact.instagram,
+      siteContent.contact.facebook,
+      siteContent.contact.x,
+    ],
     url: new URL("/about", siteUrl).toString(),
   };
 

@@ -83,6 +83,7 @@ export const siteContent = {
       "https://www.linkedin.com/in/wongsathon-witthayahom-9b5426367/",
     discord: "https://discord.com/users/1130846576013738004",
     facebook: "https://www.facebook.com/wongsathon.witthayakhom",
+    x: "https://x.com/Tajime_ROSE",
     location: "Samut Songkhram, Thailand",
   },
   seo: {

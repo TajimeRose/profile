@@ -34,6 +34,12 @@ export function ContactBackdropWord() {
                 <a href={siteContent.contact.instagram} target="_blank" rel="noreferrer">
                   Instagram ↗
                 </a>
+                <a href={siteContent.contact.facebook} target="_blank" rel="noreferrer">
+                  Facebook ↗
+                </a>
+                <a href={siteContent.contact.x} target="_blank" rel="noreferrer">
+                  X ↗
+                </a>
                 <span>{siteContent.contact.location}</span>
               </div>
             </div>

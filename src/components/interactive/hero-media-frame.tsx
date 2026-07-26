@@ -24,7 +24,7 @@ export function HeroMediaFrame({ isReady = false, children, control }: HeroMedia
           priority
           fetchPriority="high"
           sizes="100vw"
-          className="object-cover"
+          className="object-contain"
         />
       </picture>
 
