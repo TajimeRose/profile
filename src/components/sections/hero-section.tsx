@@ -26,9 +26,9 @@ export function HeroSection() {
             className="hero-cinematic__title display-balance text-paper-0"
             aria-label={siteContent.hero.title}
           >
-            <span className="hero-cinematic__title-line">I turn ideas into</span>
+            <span className="hero-cinematic__title-line">I bring ideas to life</span>
             <span className="hero-cinematic__title-line">
-              <span className="hero-cinematic__accent">thoughtful web experiences.</span>
+              <span className="hero-cinematic__accent">through design and code.</span>
             </span>
           </h1>
           <p className="copy-pretty mt-6 max-w-[34rem] text-base leading-7 text-paper-0/78 sm:mt-7 sm:text-lg">

@@ -7,7 +7,7 @@ export const siteContent = {
     "Frontend developer and computer science student building responsive, creative web experiences.",
   hero: {
     eyebrow: "TAJIMEROSE / FRONTEND DEVELOPER / CREATIVE WEB",
-    title: "I turn ideas into thoughtful web experiences.",
+    title: "I bring ideas to life through design and code.",
     supportingCopy:
       "I'm Wongsathon Witthayakhom—Rose to most people. I study computer science and build responsive interfaces with a focus on clear structure, purposeful motion, and a distinct visual character.",
     primaryAction: { label: "View My Work", href: "#selected-work" },
