@@ -13,8 +13,40 @@ const navigation = [
   { label: "Contact", href: "/#contact", sectionId: "contact", route: null },
 ] as const;
 
+const socialLinks = [
+  { label: "Instagram", href: siteContent.contact.instagram, icon: "instagram" },
+  { label: "Facebook", href: siteContent.contact.facebook, icon: "facebook" },
+  { label: "X", href: siteContent.contact.x, icon: "x" },
+] as const;
+
 const focusableSelector =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function SocialIcon({ name }: { name: (typeof socialLinks)[number]["icon"] }) {
+  if (name === "instagram") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24" className="size-[1.05rem] fill-none stroke-current stroke-[1.8]">
+        <rect width="16" height="16" x="4" y="4" rx="4" />
+        <circle cx="12" cy="12" r="3.5" />
+        <circle cx="17.3" cy="6.8" r="1" className="fill-current stroke-none" />
+      </svg>
+    );
+  }
+
+  if (name === "facebook") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24" className="size-[1.05rem] fill-current">
+        <path d="M13.6 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1v2.3H8v3.1h2.5v8h3.1Z" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="size-[1.05rem] fill-none stroke-current stroke-[1.8]">
+      <path d="m5 4 14 16M19 4 5 20" />
+    </svg>
+  );
+}
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -160,6 +192,26 @@ export function SiteHeader() {
               })}
             </nav>
 
+            <div className="flex items-center gap-1">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Visit TajimeRose on ${social.label}`}
+                  title={social.label}
+                  className={`grid size-11 place-items-center rounded-full transition-colors ${
+                    isHeroState
+                      ? "text-paper-0/72 hover:bg-paper-0/12 hover:text-paper-0"
+                      : "text-ink-600 hover:bg-paper-2 hover:text-ink-900"
+                  }`}
+                >
+                  <SocialIcon name={social.icon} />
+                </a>
+              ))}
+            </div>
+
             <a
               href={`mailto:${siteContent.contact.email}`}
               className={`inline-flex min-h-11 items-center justify-center rounded-full border px-5 text-[0.78rem] font-bold tracking-[-0.01em] transition-colors ${
@@ -247,6 +299,20 @@ export function SiteHeader() {
                 <span>Let&apos;s talk</span>
                 <span aria-hidden="true">↗</span>
               </a>
+              <div className="flex items-center gap-2">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Visit TajimeRose on ${social.label}`}
+                    className="grid size-11 place-items-center rounded-full border border-paper-0/15 text-paper-0/72 transition-colors hover:border-ember-500 hover:text-ember-500"
+                  >
+                    <SocialIcon name={social.icon} />
+                  </a>
+                ))}
+              </div>
               <div className="flex items-center justify-between font-mono text-[0.62rem] tracking-[0.12em] text-paper-0/48 uppercase">
                 <span>{siteContent.contact.location}</span>
                 <span>Full-Stack Builder</span>
