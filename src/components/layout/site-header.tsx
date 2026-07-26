@@ -14,6 +14,7 @@ const navigation = [
 ] as const;
 
 const socialLinks = [
+  { label: "GitHub", href: siteContent.contact.github, icon: "github" },
   { label: "Instagram", href: siteContent.contact.instagram, icon: "instagram" },
   { label: "Facebook", href: siteContent.contact.facebook, icon: "facebook" },
   { label: "X", href: siteContent.contact.x, icon: "x" },
@@ -23,6 +24,14 @@ const focusableSelector =
   'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 function SocialIcon({ name }: { name: (typeof socialLinks)[number]["icon"] }) {
+  if (name === "github") {
+    return (
+      <svg aria-hidden="true" viewBox="0 0 24 24" className="size-[1.05rem] fill-current">
+        <path d="M12 2.5a9.7 9.7 0 0 0-3.1 18.9c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 2.9.8.1-.7.4-1.1.7-1.3-2.2-.3-4.6-1.1-4.6-4.8 0-1.1.4-1.9 1-2.6-.1-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 4.9 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6.6.7 1 1.5 1 2.6 0 3.7-2.3 4.5-4.6 4.8.4.3.7.9.7 1.8v2.6c0 .3.2.6.7.5A9.7 9.7 0 0 0 12 2.5Z" />
+      </svg>
+    );
+  }
+
   if (name === "instagram") {
     return (
       <svg aria-hidden="true" viewBox="0 0 24 24" className="size-[1.05rem] fill-none stroke-current stroke-[1.8]">
